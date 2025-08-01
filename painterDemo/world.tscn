@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ql1vgf0nxl2j"]
+
+[ext_resource type="Script" path="res://Grid.gd" id="1_o3vo6"]
+[ext_resource type="Shader" path="res://painter.gdshader" id="2_ywtpy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2abme"]
+render_priority = 0
+shader = ExtResource("2_ywtpy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8gmkb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w7eqr"]
+size = Vector3(2, 1, 2)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_o3vo6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_2abme")
+mesh = SubResource("PlaneMesh_8gmkb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.902766, 0.430133, 0, -0.430133, 0.902766, 0, 1.26999, 1.76379)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.493665, 0)
+shape = SubResource("BoxShape3D_w7eqr")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
